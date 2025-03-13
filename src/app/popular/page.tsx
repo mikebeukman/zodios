@@ -2,12 +2,12 @@ import { createClient } from "@/utils/tmdb/client";
 import Image from "next/image";
 import Link from "next/link";
 
-export default async function Home() {
+export default async function Page() {
   const client = await createClient();
   let movies;
 
   try {
-    movies = await client.movieUpcomingList().then((res) => res.results);
+    movies = await client["movie-popular-list"]().then((res) => res.results);
   } catch (e) {
     console.error(e);
     return [];
@@ -18,7 +18,7 @@ export default async function Home() {
   return (
     <main className="h-screen w-full flex relative flex-col bg-black">
       <div className="py-4 bg-black/90 w-full justify-center flex sticky z-20 top-0">
-        <h1 className="text-white font-bold text-2xl">Upcoming movies</h1>
+        <h1 className="text-white font-bold text-2xl">Popular movies</h1>
       </div>
       <div className="flex">
         <div className="w-[400px] h-screen [&_*]:text-white flex flex-col items-center py-8 gap-y-8">
